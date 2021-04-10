@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="heading">
+        <h5>  <i style="color:yellow;"class="far fa-grin-squint-tears" id="fa"> <span style=" color:white; font-family: 'RocknRoll One', sans-serif;"> Please dont laugh</span>  </i></h5>
+    </div>
+    <div id="container">
+<h3 id="wel"  style="font-family: 'Noto Sans SC', sans-serif; color:rgb(42, 30, 77)"class= "aa" >Welcome to DadJokes</h3>
+<h2 style="padding:40px; padding-top:10vh; margin-bottom:60px; font-family: 'Noto Sans SC', sans-serif; color:white" id="jokes" class= "aa" >Joke loading... </h2>
+<button id=b1 style="margin-bottom:20px; color:rgb(77, 77, 72) " class= "aa" onmousedown="md()" onmouseup="mu()"><b>Next</b></button>
+    </div>
+  
+
+<script>
+    const jokes=document.querySelector("#jokes");
+    const next = document.querySelector("#b1");
+    
+    const generateJokes=()=>
+    {
+
+      const setHeader ={
+          headers : {
+             Accept : "application/json" 
+          }
+      }
+
+        fetch('https://icanhazdadjoke.com',setHeader)
+        .then((res)=>res.json())           // converting res=responce from html document to json format.
+        .then((data)=>   // by setHeader() method we are getting only joke from whole document of json from above link and then passing 
+                             // the outout in "data" variable.
+        {
+            console.log(data);
+            console.log(setHeader);
+            jokes.innerHTML=data.joke;
+        }).catch((error)=>
+        {
+            console.log(error);
+
+        })
+    }
+
+    next.addEventListener("click",generateJokes);
+    generateJokes();
+
+    function md()
+    {
+        next.style.background = "lightblue";
+    }
+    function mu()
+    {
+        next.style.background= " rgba(252, 181, 234, 0.644)";
+    }
+    
+</script>
+
+</body>
+</html>
